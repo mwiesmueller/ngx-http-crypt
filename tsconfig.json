@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "removeComments": true,
+    "noImplicitAny": false,
+    "module": "es2015",
+    "target": "es2015",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "lib": ["es5", "es2015", "dom"]
+  },
+
+  "exclude": [
+    "node_modules",
+    "demo",
+    "gulp-tasks",
+    "**/*.*spec.ts"
+  ]
+}

@@ -1,0 +1,26 @@
+.idea
+gulp-tasks
+logs
+
+# typings
+typings
+
+# testing
+karma.conf.js
+test.bundle.js
+coverage
+
+# demo build
+doc
+demo
+demo-build
+webpack.config.js
+
+#typescript sources
+!/bundles/*.js.map
+
+/demo
+
+*.spec.*
+
+gulp-tasks

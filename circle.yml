@@ -1,0 +1,18 @@
+
+machine:
+  timezone: Europe/Berlin
+
+  node:
+    version: 8.4.0
+
+dependencies:
+  pre:
+    - npm install
+
+general:
+  artifacts:
+    - "coverage" # relative to the build directory
+
+test:
+  override:
+    - npm run test
