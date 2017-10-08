@@ -19,11 +19,11 @@ export class CryptHttpService {
   }
 
   private decrypt(content) {
-    if (content.text) {
-      content = content.text();
-    }
-
     if (!this.cryptInactive) {
+      if (content.text) {
+        content = content.text();
+      }
+
       const bytes = CryptoJS.AES.decrypt(content.toString(), this.secret);
       const decrypted = {
         json: () => {
