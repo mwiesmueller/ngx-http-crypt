@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, ResponseContentType } from '@angular/http';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as CryptoJS from 'crypto-js';
@@ -9,6 +10,8 @@ import * as CryptoJS from 'crypto-js';
 export class CryptHttpService {
   secret: string = '';
   cryptInactive: boolean;
+  running: boolean;
+  isOnLoad = new BehaviorSubject<boolean>(this.running);
 
   constructor(@Inject(Http) private http: Http) {
   }
@@ -31,9 +34,11 @@ export class CryptHttpService {
         }
       };
 
+      this.isOnLoad.next(false);
       return decrypted
     }
 
+    this.isOnLoad.next(false);
     this.warn();
     return content;
   }
@@ -58,7 +63,13 @@ export class CryptHttpService {
     this.cryptInactive = options.cryptInactive;
   }
 
+  public onLoad(): Observable<boolean> {
+    return this.isOnLoad.asObservable();
+  }
+
   public get(url: string, options: any): Observable<any> {
+    this.isOnLoad.next(true);
+
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
     }
@@ -67,6 +78,8 @@ export class CryptHttpService {
   }
 
   public patch(url: string, body: any, options: any): Observable<any> {
+    this.isOnLoad.next(true);
+
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
       body = this.encrypt(body);
@@ -76,6 +89,8 @@ export class CryptHttpService {
   }
 
   public post(url: string, body: any, options: any): Observable<any> {
+    this.isOnLoad.next(true);
+
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
       options.responseType = ResponseContentType.Text;
@@ -86,6 +101,8 @@ export class CryptHttpService {
   }
 
   public put(url: string, body: any, options: any): Observable<any> {
+    this.isOnLoad.next(true);
+
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
       body = this.encrypt(body);
@@ -96,6 +113,8 @@ export class CryptHttpService {
   }
 
   public delete(url: string, options: any): Observable<any> {
+    this.isOnLoad.next(true);
+
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
     }
@@ -104,6 +123,8 @@ export class CryptHttpService {
   }
 
   public options(url: string, options: any): Observable<any> {
+    this.isOnLoad.next(true);
+
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
     }

@@ -90,6 +90,36 @@ export class IamAComponent {
 
 ```
 
+### Subscribe module activity
+
+With this method it's possible to subscribe activity for ex a loadingbar.
+
+Example:
+```
+import { CryptHttpService } from 'ngx-http-crypt';
+import { Component, ViewEncapsulation, Inject } from '@angular/core';
+
+
+@Component({
+  .
+  .
+  .
+})
+export class IamAComponent {
+
+  constructor(public crypt: CryptHttpService) {
+    this.crypt.onLoad().subscribe(d => {
+      d => true when a request is running, false when it's done
+    });
+  }
+
+  send() {
+    this.crypt.post(url: string, options?: RequestOptionArgs).subscribe(res => res)
+  }
+}
+
+```
+
 ## License
 
 The MIT License (MIT)
