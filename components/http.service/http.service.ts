@@ -74,7 +74,7 @@ export class CryptHttpService {
       options.headers = this.setCryptHeaders(options.headers);
     }
 
-    return this.http.get(url, options).map(res => this.decrypt(res));
+    return this.http.get(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
   }
 
   public patch(url: string, body: any, options: any): Observable<any> {
@@ -97,7 +97,7 @@ export class CryptHttpService {
       body = this.encrypt(body);
     }
 
-    return this.http.post(url, body, options).map(res => this.decrypt(res));
+    return this.http.post(url, body, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
   }
 
   public put(url: string, body: any, options: any): Observable<any> {
@@ -109,7 +109,7 @@ export class CryptHttpService {
     }
 
 
-    return this.http.put(url, body, options).map(res => this.decrypt(res));
+    return this.http.put(url, body, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
   }
 
   public delete(url: string, options: any): Observable<any> {
@@ -119,7 +119,7 @@ export class CryptHttpService {
       options.headers = this.setCryptHeaders(options.headers);
     }
 
-    return this.http.delete(url, options).map(res => this.decrypt(res));
+    return this.http.delete(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
   }
 
   public options(url: string, options: any): Observable<any> {
@@ -129,6 +129,6 @@ export class CryptHttpService {
       options.headers = this.setCryptHeaders(options.headers);
     }
 
-    return this.http.options(url, options).map(res => this.decrypt(res));
+    return this.http.options(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
   }
 }
