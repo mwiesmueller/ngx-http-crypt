@@ -1,6 +1,6 @@
 {
   "name": "ngx-http-crypt",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "scripts": {
     "clean": "rimraf node_modules doc dist && npm cache clean",

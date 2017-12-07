@@ -24,3 +24,16 @@ webpack.config.js
 *.spec.*
 
 gulp-tasks
+
+**/.DS_Store
+nbproject
+manifest.mf
+build.xml
+node_modules/*
+npm-debug.log
+coverage
+*.ts
+!*.d.ts
+tests
+typings
+typings.json
