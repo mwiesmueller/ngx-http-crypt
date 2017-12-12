@@ -1,22 +1,26 @@
 {
   "compilerOptions": {
-    "removeComments": true,
-    "noImplicitAny": false,
     "module": "es2015",
-    "target": "es2015",
+    "target": "es5",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
-    "sourceMap": true,
     "moduleResolution": "node",
-    "rootDir": ".",
-    "lib": ["es5", "es2015", "dom"]
+    "noImplicitAny": false,
+    "types": [
+      "jasmine",
+      "node"
+    ],
+    "lib": ["es2015", "dom"]
   },
-
   "exclude": [
     "node_modules",
+    "dist",
     "demo",
-    "gulp-tasks",
     "**/*.*spec.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true
+  }
 }
