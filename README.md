@@ -60,6 +60,7 @@ export class AppComponent {
 
 - secret: Define your own secret for the AES encryption
 - cryptInactive: Set it to true when you like to disable the encryption. Default is false
+- warnInactive: Set it to true when you like to disable the warn message on transfer of a not encrypted content.
 
 ### Make your first Call with encryption
 

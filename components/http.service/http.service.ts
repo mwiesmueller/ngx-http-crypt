@@ -10,6 +10,7 @@ import * as CryptoJS from 'crypto-js';
 export class CryptHttpService {
   secret: string = '';
   cryptInactive: boolean;
+  warnInactive: boolean;
   running: boolean;
   isOnLoad = new BehaviorSubject<boolean>(this.running);
 
@@ -39,7 +40,11 @@ export class CryptHttpService {
     }
 
     this.isOnLoad.next(false);
-    this.warn();
+
+    if (!this.warnInactive) {
+      this.warn();
+    }
+
     return content;
   }
 
@@ -60,6 +65,7 @@ export class CryptHttpService {
 
   public configure(options) {
     this.secret = options.secret;
+    this.warnInactive = options.warnInactive;
     this.cryptInactive = options.cryptInactive;
   }
 
