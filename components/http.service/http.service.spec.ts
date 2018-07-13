@@ -1,5 +1,6 @@
 import { inject, TestBed, async, tick } from '@angular/core/testing';
 import { CryptHttpService } from '../http.service/http.service';
+import { CryptService } from '../crypt.service/crypt.service';
 import { HttpModule, Headers } from '@angular/http';
 
 describe('Http Service', () => {
@@ -9,7 +10,7 @@ describe('Http Service', () => {
     TestBed.configureTestingModule({
       imports: [ HttpModule ],
       providers: [
-        CryptHttpService
+        CryptHttpService, CryptService
       ]
     });
   });

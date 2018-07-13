@@ -2,8 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, ResponseContentType } from '@angular/http';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
+import { CryptService } from '../crypt.service/crypt.service';
 import 'rxjs/add/operator/map';
-import * as CryptoJS from 'crypto-js';
 
 @Injectable()
 
@@ -14,12 +14,12 @@ export class CryptHttpService {
   running: boolean;
   isOnLoad = new BehaviorSubject<boolean>(this.running);
 
-  constructor(@Inject(Http) private http: Http) {
+  constructor(@Inject(Http) private http: Http, private crypt: CryptService) {
   }
 
   private encrypt(content) {
-    const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(content), this.secret).toString();
-    return ciphertext.toString();
+    const ciphertext = this.crypt.encrypt(JSON.stringify(content), this.secret);
+    return ciphertext;
   }
 
   private decrypt(content) {
@@ -28,10 +28,10 @@ export class CryptHttpService {
         content = content.text();
       }
 
-      const bytes = CryptoJS.AES.decrypt(content.toString(), this.secret);
+      const bytes = this.crypt.decrypt(content.toString(), this.secret);
       const decrypted = {
         json: () => {
-          return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+          return JSON.parse(bytes);
         }
       };
 
