@@ -34,6 +34,10 @@ export class CryptService {
   }
 
   public decrypt(transitmessage: any, pass: any) {
+    if (transitmessage.toString() === '{}') {
+      return JSON.stringify({});
+    }
+
     const hexResult: any = this.base64ToHex(transitmessage)
 
     const salt = CryptoJS.enc.Hex.parse(hexResult.substr(0, 64));
