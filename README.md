@@ -1,4 +1,4 @@
-# ngx-http-crypt (Angular 4+)
+# ngx-http-crypt (Angular 7+)
 
 This module is the counterpart to [express-crypto](https://www.npmjs.com/package/express-crypto) and designed to transmit a encrypted content to a REST API. As encryption is used the `AES Standard`.
 

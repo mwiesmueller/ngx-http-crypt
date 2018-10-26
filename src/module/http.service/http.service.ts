@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, ResponseContentType } from '@angular/http';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { CryptService } from '../crypt.service/crypt.service';
 import 'rxjs/add/operator/map';
 
@@ -17,12 +16,12 @@ export class CryptHttpService {
   constructor(@Inject(Http) private http: Http, private crypt: CryptService) {
   }
 
-  private encrypt(content) {
+  private encrypt(content: any) {
     const ciphertext = this.crypt.encrypt(JSON.stringify(content), this.secret);
     return ciphertext;
   }
 
-  private decrypt(content) {
+  private decrypt(content: any) {
     if (!this.cryptInactive) {
       if (content.text) {
         content = content.text();
@@ -48,7 +47,7 @@ export class CryptHttpService {
     return content;
   }
 
-  private setCryptHeaders(headers) {
+  private setCryptHeaders(headers: any) {
     if (!headers) {
       headers = new Headers();
     }
@@ -63,7 +62,7 @@ export class CryptHttpService {
     console.warn('Warning: You transfer non-encrypted content to the interface. Please check your settings');
   }
 
-  public configure(options) {
+  public configure(options: any) {
     this.secret = options.secret;
     this.warnInactive = options.warnInactive;
     this.cryptInactive = options.cryptInactive;
@@ -91,7 +90,7 @@ export class CryptHttpService {
       body = this.encrypt(body);
     }
 
-    return this.http.patch(url, body, options).map(res => this.decrypt(res));
+    return this.http.patch(url, body, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
   }
 
   public post(url: string, body: any, options: any): Observable<any> {
