@@ -5,7 +5,7 @@ var marked = require("marked");
 var renderer = new marked.Renderer();
 
 // Webpack Plugins
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+// var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -182,9 +182,9 @@ module.exports = function makeWebpackConfig() {
   if (!isTest && !isTestWatch) {
     config.plugins.push(
 
-      new CommonsChunkPlugin({
-        name: ['vendor', 'polyfills']
-      }),
+      // new CommonsChunkPlugin({
+      //   name: ['vendor', 'polyfills']
+      // }),
 
       new HtmlWebpackPlugin({
         template: './demo/public/index.html',
