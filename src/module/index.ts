@@ -9,3 +9,6 @@ import { CryptService } from './crypt.service/crypt.service';
 })
 
 export class NgxHttpCryptModule {}
+
+export { CryptHttpService } from './http.service/http.service';
+export { CryptService } from './crypt.service/crypt.service';
