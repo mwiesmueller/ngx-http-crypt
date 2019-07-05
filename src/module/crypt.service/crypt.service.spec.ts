@@ -1,6 +1,5 @@
 import { inject, TestBed, async, tick } from '@angular/core/testing';
 import { CryptService } from '../crypt.service/crypt.service';
-import { HttpModule, Headers } from '@angular/http';
 
 describe('Crypt Service', () => {
   beforeEach(() => {

@@ -1,14 +1,14 @@
-import { inject, TestBed, async, tick } from '@angular/core/testing';
+import { inject, TestBed} from '@angular/core/testing';
 import { CryptHttpService } from '../http.service/http.service';
 import { CryptService } from '../crypt.service/crypt.service';
-import { HttpModule, Headers } from '@angular/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 describe('Http Service', () => {
   beforeEach(() => {
     spyOn(window.console, 'warn');
 
     TestBed.configureTestingModule({
-      imports: [ HttpModule ],
+      imports: [ HttpClientModule ],
       providers: [
         CryptHttpService, CryptService
       ]
@@ -47,20 +47,20 @@ describe('Http Service', () => {
   it('... must return new Headers when no headers are defined', inject([ CryptHttpService ], (crypt) => {
     const headers = crypt.setCryptHeaders();
 
-    expect(headers.toJSON()['Content-Type']).toBeDefined();
-    expect(headers.toJSON()['Content-encrypted']).toBeDefined();
+    expect(headers.get('Content-Type')).toBeDefined();
+    expect(headers.get('Content-encrypted')).toBeDefined();
   }));
 
   it('... must append to Headers when are defined', inject([ CryptHttpService ], (crypt) => {
-    const newheaders = new Headers();
+    const newheaders = new HttpHeaders();
 
     newheaders.set('foo', 'Bar');
 
     const headers = crypt.setCryptHeaders(newheaders);
 
-    expect(headers.toJSON()['Content-Type']).toBeDefined();
-    expect(headers.toJSON()['Content-encrypted']).toBeDefined();
-    expect(headers.toJSON().foo).toBeDefined();
+    expect(headers.get('Content-Type')).toBeDefined();
+    expect(headers.get('Content-encrypted')).toBeDefined();
+    expect(headers.get('foo')).toBeDefined();
   }));
 
   it('... CryptHttpService.warn must exist', inject([ CryptHttpService ], (crypt) => {

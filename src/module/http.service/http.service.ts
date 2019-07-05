@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Headers, ResponseContentType } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { CryptService } from '../crypt.service/crypt.service';
 import 'rxjs/add/operator/map';
@@ -13,7 +13,7 @@ export class CryptHttpService {
   running: boolean;
   isOnLoad = new BehaviorSubject<boolean>(this.running);
 
-  constructor(@Inject(Http) private http: Http, private crypt: CryptService) {
+  constructor(@Inject(HttpClient) private http: HttpClient, private crypt: CryptService) {
   }
 
   private encrypt(content: any) {
@@ -49,7 +49,7 @@ export class CryptHttpService {
 
   private setCryptHeaders(headers: any) {
     if (!headers) {
-      headers = new Headers();
+      headers = new HttpHeaders();
     }
 
     headers.set('Content-Type', 'application/text');
@@ -98,7 +98,7 @@ export class CryptHttpService {
 
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
-      options.responseType = ResponseContentType.Text;
+      options.rresponseType = 'text' as 'json';
       body = this.encrypt(body);
     }
 
