@@ -28,9 +28,16 @@ export class CryptHttpService {
       }
 
       const bytes = this.crypt.decrypt(content.toString(), this.secret);
-      this.isOnLoad.next(false);
 
-      return JSON.parse(bytes);
+      try {
+        const decrypted = JSON.parse(bytes);
+        this.isOnLoad.next(false);
+
+        return decrypted;
+      } catch (err) {
+        this.isOnLoad.next(false);
+        return { error: 'Can not decypted the content' };
+      }
     }
 
     this.isOnLoad.next(false);
@@ -72,6 +79,7 @@ export class CryptHttpService {
 
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
+      options.responseType = 'text';
     }
 
     return this.http.get(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
@@ -83,6 +91,7 @@ export class CryptHttpService {
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
       body = this.encrypt(body);
+      options.responseType = 'text';
     }
 
     return this.http.patch(url, body, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
@@ -106,6 +115,7 @@ export class CryptHttpService {
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
       body = this.encrypt(body);
+      options.responseType = 'text';
     }
 
 
@@ -117,6 +127,7 @@ export class CryptHttpService {
 
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
+      options.responseType = 'text';
     }
 
     return this.http.delete(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
@@ -127,6 +138,7 @@ export class CryptHttpService {
 
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
+      options.responseType = 'text';
     }
 
     return this.http.options(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
