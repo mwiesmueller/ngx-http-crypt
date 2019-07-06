@@ -49,11 +49,11 @@ export class CryptHttpService {
 
   private setCryptHeaders(headers: any) {
     if (!headers) {
-      headers = new HttpHeaders({
-        'Content-Type': 'application/text',
-        'Content-encrypted': 'aes'
-      });
+      headers = new HttpHeaders();
     }
+
+    headers.append('Content-Type', 'application/text');
+    headers.append('Content-encrypted', 'aes');
 
     return headers;
   }
@@ -98,7 +98,7 @@ export class CryptHttpService {
 
     if (!this.cryptInactive) {
       options.headers = this.setCryptHeaders(options.headers);
-      options.responseType = 'text' as 'json';
+      options.responseType = 'text';
       body = this.encrypt(body);
     }
 
