@@ -28,14 +28,9 @@ export class CryptHttpService {
       }
 
       const bytes = this.crypt.decrypt(content.toString(), this.secret);
-      const decrypted = {
-        json: () => {
-          return JSON.parse(bytes);
-        }
-      };
-
       this.isOnLoad.next(false);
-      return decrypted
+
+      return JSON.parse(bytes);
     }
 
     this.isOnLoad.next(false);

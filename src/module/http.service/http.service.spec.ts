@@ -28,7 +28,7 @@ describe('Http Service', () => {
     const decrypt = crypt.decrypt(encrypt);
 
     expect(encrypt).toBeDefined();
-    expect(decrypt.json().foo).toBe('bar');
+    expect(decrypt.foo).toBe('bar');
   }));
 
   it('... Test decrypt function when encyrpt is inactive and a warn message must be log', inject([ CryptHttpService ], (crypt) => {
