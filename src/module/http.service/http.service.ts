@@ -52,8 +52,8 @@ export class CryptHttpService {
       headers = new HttpHeaders();
     }
 
-    headers.append('Content-Type', 'application/text');
-    headers.append('Content-encrypted', 'aes');
+    headers = headers.append('Content-Type', 'application/text');
+    headers = headers.append('Content-encrypted', 'aes');
 
     return headers;
   }
