@@ -2,7 +2,7 @@
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "ngx-http-crypt",
   "description": "ngx http crypt module to de- and encrypt http requests",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

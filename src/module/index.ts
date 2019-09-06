@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CryptHttpService } from './http.service/http.service';
+import { HttpClientModule } from '@angular/common/http';
 import { CryptService } from './crypt.service/crypt.service';
 
 @NgModule({
+  imports: [
+    HttpClientModule
+  ],
   providers: [
     CryptHttpService, CryptService
   ]
