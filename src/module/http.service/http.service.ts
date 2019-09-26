@@ -82,7 +82,17 @@ export class CryptHttpService {
       options.responseType = 'text';
     }
 
-    return this.http.get(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
+    return this.http.get(url, options).map(res => {
+      if (options && options.observe.toLowerCase() === 'response') {
+        const newRes: any = res;
+
+        newRes.body = this.decrypt(newRes.body);
+
+        return newRes;
+      }
+
+      return this.decrypt(res);
+    }, e => this.isOnLoad.next(false));
   }
 
   public patch(url: string, body: any, options: any): Observable<any> {
