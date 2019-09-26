@@ -83,7 +83,7 @@ export class CryptHttpService {
     }
 
     return this.http.get(url, options).map(res => {
-      if (options && options.observe.toLowerCase() === 'response') {
+      if (options && options.observe === 'response') {
         const newRes: any = res;
 
         newRes.body = this.decrypt(newRes.body);
