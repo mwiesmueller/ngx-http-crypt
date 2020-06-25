@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { CryptService } from '../crypt.service/crypt.service';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 
@@ -82,7 +82,7 @@ export class CryptHttpService {
       options.responseType = 'text';
     }
 
-    return this.http.get(url, options).map(res => {
+    return this.http.get(url, options).pipe(map(res => {
       if (options && options.observe === 'response') {
         const newRes: any = res;
 
@@ -92,7 +92,7 @@ export class CryptHttpService {
       }
 
       return this.decrypt(res);
-    }, e => this.isOnLoad.next(false));
+    }, e => this.isOnLoad.next(false)));
   }
 
   public patch(url: string, body: any, options: any): Observable<any> {
@@ -104,7 +104,7 @@ export class CryptHttpService {
       options.responseType = 'text';
     }
 
-    return this.http.patch(url, body, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
+    return this.http.patch(url, body, options).pipe(map(res => this.decrypt(res), e => this.isOnLoad.next(false)));
   }
 
   public post(url: string, body: any, options: any): Observable<any> {
@@ -116,7 +116,7 @@ export class CryptHttpService {
       body = this.encrypt(body);
     }
 
-    return this.http.post(url, body, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
+    return this.http.post(url, body, options).pipe(map(res => this.decrypt(res), e => this.isOnLoad.next(false)));
   }
 
   public put(url: string, body: any, options: any): Observable<any> {
@@ -129,7 +129,7 @@ export class CryptHttpService {
     }
 
 
-    return this.http.put(url, body, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
+    return this.http.put(url, body, options).pipe(map(res => this.decrypt(res), e => this.isOnLoad.next(false)));
   }
 
   public delete(url: string, options: any): Observable<any> {
@@ -140,7 +140,7 @@ export class CryptHttpService {
       options.responseType = 'text';
     }
 
-    return this.http.delete(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
+    return this.http.delete(url, options).pipe(map(res => this.decrypt(res), e => this.isOnLoad.next(false)));
   }
 
   public options(url: string, options: any): Observable<any> {
@@ -151,6 +151,6 @@ export class CryptHttpService {
       options.responseType = 'text';
     }
 
-    return this.http.options(url, options).map(res => this.decrypt(res), e => this.isOnLoad.next(false));
+    return this.http.options(url, options).pipe(map(res => this.decrypt(res), e => this.isOnLoad.next(false)));
   }
 }
