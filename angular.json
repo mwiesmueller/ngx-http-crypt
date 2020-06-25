@@ -19,8 +19,8 @@
           "options": {
             "outputPath": "dist/package-template",
             "customWebpackConfig": {
-               "path": "./extra-webpack.config.js"
-            }, 
+              "path": "./extra-webpack.config.js"
+            },
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -138,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "package-template"
+  "defaultProject": "package-template",
+  "cli": {
+    "analytics": "c1f95a43-0a7d-4f97-9a37-343598c378c1"
+  }
 }
