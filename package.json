@@ -2,7 +2,7 @@
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "name": "ngx-http-crypt",
   "description": "ngx http crypt module to de- and encrypt http requests",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -41,7 +41,7 @@
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
     "core-js": "^3.6.5",
-    "crypto-js": "4.0.0",
+    "crypto-js": "3.1.9-1",
     "ng-cli-pug-loader": "^0.2.2",
     "rxjs": "6.5.2",
     "rxjs-compat": "6.5.5",
